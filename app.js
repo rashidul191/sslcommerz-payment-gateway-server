@@ -29,10 +29,10 @@ app.use("/ssl-request/:amount", async (req, res, next) => {
     total_amount: amount,
     currency: "BDT",
     tran_id: "REF123",
-    success_url: "http://localhost:8080/ssl-payment-success",
-    fail_url: "http://localhost:8080/ssl-payment-failure",
-    cancel_url: "http://localhost:8080/ssl-payment-cancel",
-    ipn_url: "http://localhost:8080/ssl-payment-ipn",
+    success_url: `${process.env.LIVE_SITE}/ssl-payment-success`,
+    fail_url: `${process.env.LIVE_SITE}/ssl-payment-failure`,
+    cancel_url: `${process.env.LIVE_SITE}/ssl-payment-cancel`,
+    ipn_url: `${process.env.LIVE_SITE}/ssl-payment-ipn`,
     shipping_method: "Courier",
     product_name: "Computer.",
     product_category: "Electronic",
@@ -86,6 +86,7 @@ app.post("/ssl-payment-success", async (req, res, next) => {
   //return res.status(200).redirect("http://localhost:3000/");
   return res.status(200).json({
     status: "success",
+    message: "ssl-payment-success !!!",
     data: data,
   });
 });
@@ -109,6 +110,7 @@ app.post("/ssl-payment-failure", async (req, res, next) => {
   console.log("failure: ", data);
   return res.status(200).json({
     status: "success",
+    message: "ssl-payment-failure !!!",
     data: data,
   });
 });
@@ -119,6 +121,7 @@ app.post("/ssl-payment-ipn", async (req, res, next) => {
   console.log("ipn: ", data);
   return res.status(200).json({
     status: "success",
+    message: "ssl-payment-ipn !!!",
     data: data,
   });
 });
